@@ -32,9 +32,5 @@ server {
         add_header Content-Type text/plain;
         return 200 '/backend/content/promotions/(.*)';
     }
-
-    location /backend/content-v2/ {
-        proxy_pass http://denpasar-service.qa1-sg.cld/backend/content/;
-    }
     
 }
