@@ -1,0 +1,40 @@
+server {
+    listen 80;
+    location /backend/content {
+        add_header Content-Type text/plain;
+        return 200 '/backend/content';
+    }
+
+    location /backend/content/promotions/ {
+        add_header Content-Type text/plain;
+        return 200 '/backend/content/promotions/';
+    }
+
+    location = /backend/content/promotions/test-promo-404 {
+        return 404;
+    }
+
+    location = /backend/content/promotions/test-promo-500 {
+        return 500;
+    }
+
+    location ~ /backend/content/promotions/parameters/(.*) {
+        add_header Content-Type text/plain;
+        return 200 '/backend/content/promotions/parameters/(.*)';
+    }
+
+    location ~ /backend/content/promotions/(.*)/_parameters {
+        add_header Content-Type text/plain;
+        return 200 '/backend/content/promotions/(.*)/_parameters';
+    }
+
+    location ~ /backend/content/promotions/(.*) {
+        add_header Content-Type text/plain;
+        return 200 '/backend/content/promotions/(.*)';
+    }
+
+    location /backend/content-v2/ {
+        proxy_pass http://denpasar-service.qa1-sg.cld/backend/content/;
+    }
+    
+}
